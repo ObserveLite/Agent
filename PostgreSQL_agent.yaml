@@ -1,0 +1,21 @@
+server:
+  log_level: debug
+
+metrics:
+  wal_directory: /tmp/agent
+
+  global:
+    scrape_interval: 60s
+    remote_write:
+      - url: http://3.6.192.30:9009/api/v1/push
+        headers:
+          X-Scope-OrgID: Linux_monitoring
+
+integrations:
+  postgres_exporter:
+    enabled: true
+    data_source_names:
+      - "postgresql://postgres_exporter:yourpassword@localhost:5432/company"
+    query_path: /home/roots/postgres_exporter-0.15.0.linux-amd64/queries.yml
+
+
